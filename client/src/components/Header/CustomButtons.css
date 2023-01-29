@@ -1,0 +1,11 @@
+.myClass{display: flex;
+    flex-direction: row;
+margin: 0 3% 0 auto;
+
+}
+
+.myClass>button , .myClass>p ,.myClass>div {
+    margin-right: 40px;
+    font-size: 14px;
+    align-items: center;
+}
