@@ -21,7 +21,8 @@ export const cartReducer = createReducer(initialCartState, (builder) => {
                 (product) => product.id === newItem.id
             );
             if (existItem) {
-                state.cartItems = state.cartItems
+                console.log("eixst");
+                state.cartItems = state.cartItems;
             } else {
                 state.cartItems = [...state.cartItems, newItem];
             }

@@ -73,14 +73,14 @@ const TotalView = ({ cartItems }) => {
                 </Typography>
                 <Typography>
                     Delivery Charges
-                    <Price component="span">Rs.40</Price>
+                    <Price component="span">Rs.100</Price>
                 </Typography>
                 <TotalAmount>
                     Total Amount
-                    <Price>Rs.{price - discount + 40}</Price>
+                    <Price>Rs.{price - discount + 100}</Price>
                 </TotalAmount>
                 <Discount>
-                    You will save Rs.{discount - 40} on this order
+                    You will save Rs.{discount - 100} on this order
                 </Discount>
             </Container>
         </Box>
