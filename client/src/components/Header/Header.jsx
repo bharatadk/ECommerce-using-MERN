@@ -17,12 +17,22 @@ import { useState } from "react";
 
 const StyledHeader = styled(AppBar)`
     height: 55px;
+    padding: 0;
+    margin: 0;
 `;
 
-const StyledBox = styled(Box)`
-    margin-left: 12%;
-    line-height: 0;
-`;
+const StyledBox = styled(Box)(({ theme }) => ({
+    marginLeft: "12%",
+    [theme.breakpoints.down("md")]: {},
+}));
+
+const Image = styled("img")(({ theme }) => ({
+    paddingRight: "5px",
+    marginBottom: "-10px",
+    [theme.breakpoints.down("md")]: {
+        paddingRight: "120px",
+    },
+}));
 
 const SubHeading = styled(Typography)`
     font-size: 10px;
@@ -49,11 +59,11 @@ const Header = () => {
         "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png";
 
     const list = () => (
-        <Box style={{ width: 250 }}>
+        <Box style={{ width: 250, background: "#dddddd", height: "100%" }}>
             <List>
-                <listItem button>
+                <ListItem>
                     <CustomButtons />
-                </listItem>
+                </ListItem>
             </List>
         </Box>
     );
@@ -62,7 +72,7 @@ const Header = () => {
             <Toolbar style={{ minHeight: "55px" }}>
                 <StyledBox>
                     <Link to={"/"}>
-                        <img
+                        <Image
                             src={logoURL}
                             alt="logo"
                             style={{ width: "75px" }}

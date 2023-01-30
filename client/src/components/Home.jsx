@@ -26,7 +26,7 @@ const Home = () => {
     return (
         <>
             <NavBar />
-            <Component style={{ marginTop: "55px" }}>
+            <Component style={{ marginTop: "10px" }}>
                 <Banner />
                 <MidSlide
                     products={products}

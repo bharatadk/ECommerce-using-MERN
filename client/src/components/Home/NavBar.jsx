@@ -1,16 +1,14 @@
-import { Typography, Box } from "@mui/material";
-import { styled } from "@mui/system";
 import { navData } from "../constant/data";
+
+import { Typography, Box, styled } from "@mui/material";
 
 const Component = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
     margin: "55px 130px 0 130px !important",
-    flexWrap: "no-wrap",
-    height: "100%",
-
+    overflowX: "overlay",
     [theme.breakpoints.down("lg")]: {
-        margin: "40px !important",
+        margin: "0px !important",
     },
 }));
 
@@ -29,7 +27,7 @@ const NavBar = () => {
     return (
         <Component>
             {navData.map((temp) => (
-                <Container key={temp.url}>
+                <Container key={temp.text}>
                     <img src={temp.url} style={{ width: 64 }} />
                     <Text>{temp.text}</Text>
                 </Container>

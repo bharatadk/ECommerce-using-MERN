@@ -33,3 +33,14 @@ export const removeFromCart = (id) => async (dispatch) => {
         console.log("Error while calling cart API", error.message);
     }
 };
+
+export const plusMinusCartItem = (id, count) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "plusMinusCartItem",
+            payload: [id, count],
+        });
+    } catch (error) {
+        console.log("Error while calling cart API", error.message);
+    }
+};

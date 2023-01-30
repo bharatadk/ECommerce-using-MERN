@@ -8,6 +8,7 @@ const addToCartRequest = createAction("addToCartRequest");
 const addToCart = createAction("addToCart");
 const addToCartFail = createAction("addToCartFail");
 const removeFromCart = createAction("removeFromCart");
+const plusMinusCartItem = createAction("plusMinusCartItem");
 
 export const cartReducer = createReducer(initialCartState, (builder) => {
     builder
@@ -16,15 +17,17 @@ export const cartReducer = createReducer(initialCartState, (builder) => {
         })
         .addCase(addToCart, (state, action) => {
             state.loading = false;
-            const newItem = action.payload;
+            let newItem = action.payload;
             const existItem = state.cartItems.find(
                 (product) => product.id === newItem.id
             );
             if (existItem) {
-                console.log("eixst");
                 state.cartItems = state.cartItems;
             } else {
-                state.cartItems = [...state.cartItems, newItem];
+                state.cartItems = [
+                    ...state.cartItems,
+                    { ...newItem, quantity: 1 },
+                ];
             }
         })
         .addCase(addToCartFail, (state, action) => {
@@ -35,5 +38,14 @@ export const cartReducer = createReducer(initialCartState, (builder) => {
             state.cartItems = state.cartItems.filter(
                 (product) => product.id !== action.payload
             );
+        })
+        .addCase(plusMinusCartItem, (state, action) => {
+            const [id, count] = action.payload;
+            state.cartItems = state.cartItems.map((item) => {
+                if (item.id !== id) {
+                    return item;
+                }
+                return { ...item, ["quantity"]: count };
+            });
         });
 });

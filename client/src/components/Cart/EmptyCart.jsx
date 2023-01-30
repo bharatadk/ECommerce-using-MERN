@@ -5,6 +5,7 @@ const Component = styled(Box)`
     height: 65vh;
     background: #fff;
     margin: 80px 140px;
+    border-radius: 5px;
 `;
 
 const Container = styled(Box)`

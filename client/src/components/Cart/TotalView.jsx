@@ -6,6 +6,7 @@ const Header = styled(Box)`
     padding: 15px 24px;
     background: #fff;
     borderbottom: 1px solid #f0f0f0;
+    border-radius: 5px 5px 0 0;
 `;
 
 const Heading = styled(Typography)`
@@ -15,6 +16,7 @@ const Heading = styled(Typography)`
 const Container = styled(Box)`
     padding: 15px 24px;
     background: #fff;
+    border-radius: 0 0 5px 5px;
     & > p {
         margin-bottom: 20px;
         font-size: 14px;
@@ -52,6 +54,10 @@ const TotalView = ({ cartItems }) => {
         cartItems.map((item) => {
             price += item.price.mrp;
             discount += item.price.mrp - item.price.cost;
+            console.log("price");
+            if (item.quantity > 1) {
+                price = price * item.quantity;
+            }
         });
         setPrice(price);
         setDiscount(discount);
@@ -64,7 +70,12 @@ const TotalView = ({ cartItems }) => {
             </Header>
             <Container>
                 <Typography>
-                    Price ({cartItems?.length} item)
+                    Price (
+                    {cartItems.reduce(
+                        (totalitems, item) => totalitems + item.quantity,
+                        0
+                    )}
+                    &nbsp; items)
                     <Price component="span">Rs.{price}</Price>
                 </Typography>
                 <Typography>

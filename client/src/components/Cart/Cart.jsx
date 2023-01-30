@@ -11,6 +11,7 @@ const Component = styled(Grid)(({ theme }) => ({
     padding: "30px 135px",
     marginTop: "50px",
     display: "flex",
+
     [theme.breakpoints.down("sm")]: {
         padding: "15px 0",
     },
@@ -18,6 +19,7 @@ const Component = styled(Grid)(({ theme }) => ({
 
 const LeftComponent = styled(Grid)(({ theme }) => ({
     paddingRight: 15,
+
     [theme.breakpoints.down("sm")]: {
         marginBottom: 15,
     },
@@ -40,7 +42,7 @@ const StyledButton = styled(Button)`
     margin-left: auto;
     background: #fb641b;
     color: #fff;
-    border-radius: 2px;
+    border-radius: 5px;
     width: 250px;
     height: 51px;
 `;
@@ -48,7 +50,7 @@ const StyledButton = styled(Button)`
 const Cart = () => {
     const cartDetails = useSelector((state) => state.cart);
     const { cartItems } = cartDetails;
-    const { id } = useParams();
+    let id;
 
     const dispatch = useDispatch();
 
@@ -74,9 +76,12 @@ const Cart = () => {
             {cartItems.length ? (
                 <Component container>
                     <LeftComponent item lg={9} md={9} sm={12} xs={12}>
-                        <Header>
+                        <Header style={{ borderRadius: "5px 5px 0 0 " }}>
                             <Typography
-                                style={{ fontWeight: 600, fontSize: 18 }}
+                                style={{
+                                    fontWeight: 600,
+                                    fontSize: 18,
+                                }}
                             >
                                 My Cart ({cartItems?.length})
                             </Typography>
@@ -88,7 +93,7 @@ const Cart = () => {
                                 removeItemFromCart={removeItemFromCart}
                             />
                         ))}
-                        <BottomWrapper>
+                        <BottomWrapper style={{ borderRadius: "0 0 5px 5px" }}>
                             <StyledButton
                                 onClick={() => buyNow()}
                                 variant="contained"

@@ -17,15 +17,22 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Wrapper = styled(Box)(({ theme }) => ({
-    padding: "15px",
+    padding: "0px",
+    height: "55px",
+    display: "flex",
+
     [theme.breakpoints.down("md")]: {
         display: "block",
+        paddingBottom: "200px",
     },
 }));
 const Container = styled(Box)(({ theme }) => ({
     display: "flex",
-    padding: "8px 10px",
     marginLeft: "auto",
+    alignItems: "center",
+    width: "450px",
+    justifyContent: "space-between",
+
     [theme.breakpoints.down("md")]: {
         display: "block",
     },
@@ -38,7 +45,6 @@ const LoginButton = styled(Button)`
     font-weight: 600;
     box-shadow: none;
     padding: 8px 40px;
-    margin-top: 5px;
     margin-left: 2px;
     margin-right: auto;
 `;
@@ -52,47 +58,70 @@ const CustomButtons = () => {
     };
 
     return (
-        <Wrapper className="myClass">
-            {account ? (
-                <Profile account={account} setAccount={setAccount} />
-            ) : (
-                <LoginButton variant="contained" onClick={() => openDialog()}>
-                    Login
-                </LoginButton>
-            )}
+        <Wrapper>
             <Container>
-                <Typography
-                    style={{
-                        marginTop: "3px",
-                        width: "135px",
-                    }}
-                >
-                    Become a Seller
-                </Typography>
-                {/* <Typography style={{ marginTop: "3px" }}>More</Typography> */}
-                <Link
-                    to="/cart"
-                    style={{
-                        textDecoration: "none",
-                        color: "inherit",
-                    }}
-                >
-                    <Badge
-                        badgeContent={cartItems.length}
-                        color="warning"
-                        style={{ marginLeft: "100px" }}
-                    >
-                        <ShoppingCartIcon style={{ fontSize: "20px" }} />
-
-                        <Typography
-                            style={{
-                                fontSize: "14px",
-                            }}
+                {account ? (
+                    <Profile account={account} setAccount={setAccount} />
+                ) : (
+                    <Box>
+                        <LoginButton
+                            variant="contained"
+                            onClick={() => openDialog()}
                         >
-                            Cart
-                        </Typography>
-                    </Badge>
-                </Link>
+                            Login
+                        </LoginButton>
+                    </Box>
+                )}
+
+                <Box>
+                    <Typography
+                        style={{
+                            marginTop: "3px",
+                            width: "135px",
+                            fontWeight: "600",
+                            fontSize: "16px",
+                        }}
+                    >
+                        Become a Seller
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography
+                        style={{
+                            fontSize: "16px",
+                            fontWeight: "600",
+                        }}
+                    >
+                        More
+                    </Typography>
+                </Box>
+                <Box
+                    style={{
+                        height: "100%",
+                        padding: "25px 20px 0 0 ",
+                    }}
+                >
+                    <Link
+                        to="/cart"
+                        style={{
+                            textDecoration: "none",
+                            color: "inherit",
+                        }}
+                    >
+                        <Badge badgeContent={cartItems.length} color="warning">
+                            <ShoppingCartIcon />
+
+                            <Typography
+                                style={{
+                                    fontSize: "16px",
+                                    fontWeight: "600",
+                                }}
+                            >
+                                Cart
+                            </Typography>
+                        </Badge>
+                    </Link>
+                </Box>
             </Container>
 
             <LoginDialog

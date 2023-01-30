@@ -36,6 +36,7 @@ const responsive = {
 const Banner = () => {
     return (
         <Carousel
+            style={{ marginTop: "0px !important" }}
             swipeable={false}
             draggable={false}
             responsive={responsive}
