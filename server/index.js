@@ -9,6 +9,7 @@ import Routes from "./routes/route.js";
 
 dotenv.config();
 const app = express();
+// DefaultData();
 
 const PORT = 8000;
 app.listen(PORT, () =>
@@ -22,3 +23,4 @@ app.use("/api", Routes);
 
 //mongoose connection
 Connection();
+

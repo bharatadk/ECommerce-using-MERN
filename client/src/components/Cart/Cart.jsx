@@ -6,6 +6,7 @@ import TotalView from "./TotalView";
 import EmptyCart from "./EmptyCart";
 import CartItem from "./CartItem";
 import { removeFromCart } from "../../redux/actions/cartActions";
+import StripeCheckout from "react-stripe-checkout"
 
 const Component = styled(Grid)(({ theme }) => ({
     padding: "30px 135px",

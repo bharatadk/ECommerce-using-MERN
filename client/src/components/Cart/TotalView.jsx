@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-
+import StripeCheckout from "react-stripe-checkout"
 import { Box, Typography, styled } from "@mui/material";
-
+import axios from "axios"
 const Header = styled(Box)`
     padding: 15px 24px;
     background: #fff;
@@ -43,10 +43,13 @@ const Discount = styled(Typography)`
 const TotalView = ({ cartItems }) => {
     const [price, setPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
+    const stripeKey = "pk_test_51MhyVHLnhQZkWK9cO7dQiLuFMRQUiCub7IvSWismfqlJGglJxULMzrxyIWf7qbm4IMZSZ3gteiSF15NmT1XLR1RI006P6jpTAo"
+
 
     useEffect(() => {
         totalAmount();
     }, [cartItems]);
+
 
     const totalAmount = () => {
         let price = 0,
@@ -54,7 +57,6 @@ const TotalView = ({ cartItems }) => {
         cartItems.map((item) => {
             price += item.price.mrp;
             discount += item.price.mrp - item.price.cost;
-            console.log("price");
             if (item.quantity > 1) {
                 price = price * item.quantity;
             }
@@ -62,6 +64,22 @@ const TotalView = ({ cartItems }) => {
         setPrice(price);
         setDiscount(discount);
     };
+      const handleToken = async (token,addresses)=>  {
+        const response =  await  axios.post("http://localhost:8000/api/payment",{
+            token,
+            "product":{
+            "amount":(price - discount + 100),
+            "items":
+                    ["electric jar","smartphone s22"]
+            
+        }})
+
+        console.log(response)
+    }
+
+
+   
+
 
     return (
         <Box>
@@ -93,6 +111,14 @@ const TotalView = ({ cartItems }) => {
                 <Discount>
                     You will save Rs.{discount - 100} on this order
                 </Discount>
+                <div>
+                <StripeCheckout 
+                stripeKey={stripeKey}
+                 token = {handleToken}
+                amount={price - discount + 100}
+                billingAddress
+                shippingAddress/>
+               </div>
             </Container>
         </Box>
     );
